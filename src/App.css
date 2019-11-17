@@ -12,6 +12,10 @@
   color: white;
 }
 
+.App-header-title {
+  cursor: pointer;
+}
+
 .header-tabs-container {
   display: flex;
   min-height: 10vh;
@@ -23,6 +27,7 @@
   margin: 0;
   padding: 30px;
   align-items: center;
+  cursor: pointer;
   font-size: calc(10px + 2vmin);
 }
 

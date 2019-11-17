@@ -1,7 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 
-const Header = ({ title, history }) => {
+const Header = ({ data: { title, tabs }, history }) => {
   const {
     location: { pathname }
   } = history;
@@ -12,25 +12,20 @@ const Header = ({ title, history }) => {
 
   return (
     <header className="App-header">
-      <h3 onClick={() => pushHistory("/")}>{title}</h3>
+      <h3 className="App-header-title" onClick={() => pushHistory("/")}>
+        {title}
+      </h3>
       <div className="header-tabs-container">
-        <span
-          className={`header-tab header-tab${
-            pathname.includes("home") ? "-selected" : ""
-          }`}
-        >
-          Home
-        </span>
-        <span
-          onClick={() => pushHistory("/configure")}
-          className={`header-tab header-tab${
-            pathname.includes("configure") || pathname === "/"
-              ? "-selected"
-              : ""
-          }`}
-        >
-          Configure
-        </span>
+        {tabs.map(({ label, path, goToPath }) => (
+          <span
+            onClick={() => goToPath && pushHistory(goToPath)}
+            className={`header-tab header-tab${
+              pathname.includes(path) ? "-selected" : ""
+            }`}
+          >
+            {label}
+          </span>
+        ))}
       </div>
     </header>
   );

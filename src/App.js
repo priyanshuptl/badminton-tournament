@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import { Route } from "react-router-dom";
+import { Route, withRouter } from "react-router-dom";
+import { DefaultValues } from "./defaults";
+import { UrlStrings, HeaderData } from "./static";
 import "./App.css";
 import Header from "./components/header.jsx";
 import ConfigureForm from "./components/layout/config.form";
@@ -7,15 +9,24 @@ import Home from "./components/layout/home";
 
 class App extends Component {
   render() {
+    const {
+      history: {
+        location: { pathname }
+      },
+      history
+    } = this.props;
+    if (!pathname || pathname === "/") {
+      history.push({ pathname: DefaultValues.LANDING_PAGE_URL });
+    }
+
     return (
       <div className="App">
-        <Header title="Badminton Tournament" />
-        <Route exact path="/" component={ConfigureForm} />
-        <Route path="/configure" component={ConfigureForm} />
-        <Route path="/home" component={Home} />
+        <Header data={HeaderData} />
+        <Route path={UrlStrings.CONFIGURE} component={ConfigureForm} />
+        <Route path={UrlStrings.HOME} component={Home} />
       </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);
