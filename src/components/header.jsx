@@ -12,21 +12,25 @@ const Header = ({ data: { title, tabs }, history }) => {
 
   return (
     <header className="App-header">
-      <h3 className="App-header-title" onClick={() => pushHistory("/")}>
-        {title}
-      </h3>
-      <div className="header-tabs-container">
-        {tabs.map(({ label, path, goToPath }) => (
-          <span
-            onClick={() => goToPath && pushHistory(goToPath)}
-            className={`header-tab header-tab${
-              pathname.includes(path) ? "-selected" : ""
-            }`}
-          >
-            {label}
-          </span>
-        ))}
-      </div>
+      {title && (
+        <h3 className="App-header-title" onClick={() => pushHistory("/")}>
+          {title}
+        </h3>
+      )}
+      {tabs && (
+        <div className="header-tabs-container">
+          {tabs.map(({ label, path, goToPath }) => (
+            <span
+              onClick={() => goToPath && pushHistory(goToPath)}
+              className={`header-tab header-tab${
+                pathname.includes(path) ? "-selected" : ""
+              }`}
+            >
+              {label}
+            </span>
+          ))}
+        </div>
+      )}
     </header>
   );
 };

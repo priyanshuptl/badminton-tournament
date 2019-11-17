@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import queryString from "query-string";
 import Input from "../input";
-import { DefaultValues } from "../../defaults";
+import { DefaultValues } from "../../static";
 
 const ConfigureForm = ({ history }) => {
   const [participantsCount, setParticipantsCount] = useState(
@@ -22,7 +22,8 @@ const ConfigureForm = ({ history }) => {
       ...queryString.parse(searchString),
       participantsCount,
       poolsCount,
-      qualifiersCountPerPool
+      qualifiersCountPerPool,
+      tab: DefaultValues.TAB
     };
 
     history.push({

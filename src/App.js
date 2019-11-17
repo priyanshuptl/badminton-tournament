@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Route, withRouter } from "react-router-dom";
-import { DefaultValues } from "./defaults";
-import { UrlStrings, HeaderData } from "./static";
+import { UrlStrings, HeaderData, DefaultValues } from "./static";
 import "./App.css";
 import Header from "./components/header.jsx";
 import ConfigureForm from "./components/layout/config.form";

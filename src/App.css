@@ -38,3 +38,40 @@
 .header-tab:hover {
   background-color: #3a3d42;
 }
+
+.App-subheader {
+  background-color: #3a4355;
+  min-height: 6vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  font-size: calc(10px + 1vmin);
+  color: white;
+}
+
+.App-subheader-title {
+  cursor: pointer;
+}
+
+.subheader-tabs-container {
+  display: flex;
+  min-height: 6vh;
+}
+
+.subheader-tab {
+  min-height: 5vh;
+  min-width: 15%;
+  margin: 0;
+  padding: 15px;
+  align-items: center;
+  cursor: pointer;
+  font-size: calc(10px + 2vmin);
+}
+
+.subheader-tab-selected {
+  background-color: #4c576d;
+}
+
+.subheader-tab:hover {
+  background-color: #4c576d;
+}
