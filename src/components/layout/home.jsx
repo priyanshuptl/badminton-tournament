@@ -16,13 +16,31 @@ const Home = ({ history }) => {
     tab = DefaultValues.TAB
   } = queryString.parse(searchString);
 
-  const players = [];
-  for (let i = 0; i < participantsCount; i++) {
-    players.push({
-      name: "Player " + (i + 1),
-      pool: parseInt(i % poolsCount) + 1
-    });
-  }
+  const getPlayers = () => {
+    const players = [];
+    for (let i = 0; i < participantsCount; i++) {
+      players.push({
+        name: "Player " + (i + 1),
+        pool: parseInt(i % poolsCount) + 1
+      });
+    }
+    return players;
+  };
+
+  const groupedPlayersByPools = () => {
+    const players = getPlayers();
+
+    const pools = players.reduce((acc, player) => {
+      if (acc[player.pool]) {
+        acc[player.pool] = [...acc[player.pool], player];
+      } else {
+        acc[player.pool] = [player];
+      }
+      return acc;
+    }, {});
+
+    return pools;
+  };
 
   const pushSearch = tab => {
     const newSearch = { ...queryString.parse(searchString), tab };
