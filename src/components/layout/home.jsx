@@ -16,6 +16,14 @@ const Home = ({ history }) => {
     tab = DefaultValues.TAB
   } = queryString.parse(searchString);
 
+  const players = [];
+  for (let i = 0; i < participantsCount; i++) {
+    players.push({
+      name: "Player " + (i + 1),
+      pool: parseInt(i % poolsCount) + 1
+    });
+  }
+
   const pushSearch = tab => {
     const newSearch = { ...queryString.parse(searchString), tab };
     history.push({ pathname, search: queryString.stringify(newSearch) });
