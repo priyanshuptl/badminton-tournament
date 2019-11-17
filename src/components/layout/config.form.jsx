@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import queryString from "query-string";
 import Input from "../input";
-import { DefaultValues } from "../../static";
+import { DefaultValues } from "../../defaults";
 
 const ConfigureForm = ({ history }) => {
   const [participantsCount, setParticipantsCount] = useState(

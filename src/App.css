@@ -6,9 +6,30 @@
   background-color: #282c34;
   min-height: 10vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.header-tabs-container {
+  display: flex;
+  min-height: 10vh;
+}
+
+.header-tab {
+  min-height: 5vh;
+  min-width: 15%;
+  margin: 0;
+  padding: 30px;
+  align-items: center;
+  font-size: calc(10px + 2vmin);
+}
+
+.header-tab-selected {
+  background-color: #3a3d42;
+}
+
+.header-tab:hover {
+  background-color: #3a3d42;
 }
