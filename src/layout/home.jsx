@@ -1,8 +1,9 @@
 import React from "react";
 import queryString from "query-string";
 import { withRouter } from "react-router-dom";
-import { SubheaderData, DefaultValues } from "../../static";
-import Subheader from "../subheader";
+import { SubheaderData, DefaultValues, UrlStrings } from "../static";
+import Subheader from "../components/subheader";
+import Pools from "./pools";
 
 const Home = ({ history }) => {
   const {
@@ -21,7 +22,7 @@ const Home = ({ history }) => {
     for (let i = 0; i < participantsCount; i++) {
       players.push({
         name: "Player " + (i + 1),
-        pool: parseInt(i % poolsCount) + 1
+        pool: `Pool ${parseInt(i % poolsCount) + 1}`
       });
     }
     return players;
@@ -54,6 +55,9 @@ const Home = ({ history }) => {
         onSelectTab={pushSearch}
         data={SubheaderData}
       />
+      {tab === UrlStrings.POOLS && (
+        <Pools pools={groupedPlayersByPools()} />
+      )}
     </div>
   );
 };

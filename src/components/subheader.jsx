@@ -8,6 +8,7 @@ const Subheader = ({ data: { title, tabs }, selectedTab, onSelectTab }) => {
         <div className="subheader-tabs-container">
           {tabs.map(({ label, path }) => (
             <span
+              key={"subheader-" + label}
               onClick={() => path && onSelectTab(path)}
               className={`subheader-tab subheader-tab${
                 selectedTab === path ? "-selected" : ""

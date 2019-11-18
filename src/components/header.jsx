@@ -21,6 +21,7 @@ const Header = ({ data: { title, tabs }, history }) => {
         <div className="header-tabs-container">
           {tabs.map(({ label, path, goToPath }) => (
             <span
+              key={"header-" + label}
               onClick={() => goToPath && pushHistory(goToPath)}
               className={`header-tab header-tab${
                 pathname.includes(path) ? "-selected" : ""
