@@ -75,3 +75,42 @@
 .subheader-tab:hover {
   background-color: #4c576d;
 }
+
+.input-with-label{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  max-width: 600px;
+  align-self: center;
+}
+
+.inputs-container{
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-label{
+  min-width: 300px;
+  text-align: initial;
+}
+
+.input-box-container{
+  display: flex;
+  align-items: center;
+}
+
+.input-box{
+  border-radius: 5px;
+  min-height: 20px;
+}
+
+.submit-button{
+  min-width: 120px;
+  min-height: 40px;
+  border-radius: 20px;
+  background-color: #3a3d42;
+  color: white;
+  font-size: larger;
+}

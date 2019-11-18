@@ -34,34 +34,36 @@ const ConfigureForm = ({ history }) => {
 
   return (
     <form onSubmit={onSubmit} key="ConfigureForm">
-      <Input
-        key="Number-of-participants"
-        type="number"
-        label="Number of participants"
-        value={participantsCount}
-        placeholder="Enter number of participants"
-        isRequired={true}
-        onChange={e => setParticipantsCount(e.target.value)}
-      />
-      <Input
-        key="Number-of-pool"
-        type="number"
-        label="Number of pool"
-        value={poolsCount}
-        placeholder="Enter number of pools"
-        isRequired={true}
-        onChange={e => setPoolsCount(e.target.value)}
-      />
-      <Input
-        key="Number-of-qualifiers-from-each-pool"
-        type="number"
-        label="Number of qualifiers from each pool"
-        value={qualifiersCountPerPool}
-        placeholder="Enter number of qualifiers from each pool"
-        isRequired={true}
-        onChange={e => setQalifiersCountPerPool(e.target.value)}
-      />
-      <input type="submit" value="Submit" />
+      <div className="inputs-container">
+        <Input
+          key="Number-of-participants"
+          type="number"
+          label="Number of participants"
+          value={participantsCount}
+          placeholder="Enter number of participants"
+          isRequired={true}
+          onChange={e => setParticipantsCount(e.target.value)}
+        />
+        <Input
+          key="Number-of-pool"
+          type="number"
+          label="Number of pool"
+          value={poolsCount}
+          placeholder="Enter number of pools"
+          isRequired={true}
+          onChange={e => setPoolsCount(e.target.value)}
+        />
+        <Input
+          key="Number-of-qualifiers-from-each-pool"
+          type="number"
+          label="Number of qualifiers from each pool"
+          value={qualifiersCountPerPool}
+          placeholder="Enter number of qualifiers from each pool"
+          isRequired={true}
+          onChange={e => setQalifiersCountPerPool(e.target.value)}
+        />
+      </div>
+      <input className="submit-button" type="submit" value="Submit" />
     </form>
   );
 };

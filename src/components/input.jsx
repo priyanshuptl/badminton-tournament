@@ -10,13 +10,15 @@ export default ({
 }) => (
   <div className="input-with-label">
     {label && <p className="input-label">{label}</p>}
-    <input
-      className="input-box"
-      type={type}
-      value={value}
-      onChange={onChange}
-      placeholder={placeholder}
-      required={isRequired}
-    />
+    <div className="input-box-container">
+      <input
+        className="input-box"
+        type={type}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        required={isRequired}
+      />
+    </div>
   </div>
 );
