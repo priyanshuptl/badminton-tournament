@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Row from "./row";
+import Table from "./table";
 
-const Panel = ({ title, rows = [] }) => {
+const Panel = ({ title, rows = [], columns = [] }) => {
   const [collapsed, setCollapsed] = useState(true);
   return (
     <div>
@@ -16,9 +16,7 @@ const Panel = ({ title, rows = [] }) => {
         className="content"
         style={{ display: collapsed ? "none" : "block" }}
       >
-        {rows.map((row, index) => (
-          <Row key={"collapsible-content-row-" + index} row={row} />
-        ))}
+        <Table data={rows} columns={columns} />
       </div>
     </div>
   );

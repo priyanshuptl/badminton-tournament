@@ -5,6 +5,16 @@ import { SubheaderData, DefaultValues, UrlStrings } from "../static";
 import Subheader from "../components/subheader";
 import Pools from "./pools";
 
+const columns = [
+  { Header: "Rank", accessor: "rank" },
+  { Header: "Participant", accessor: "participant" },
+  { Header: "W-L-T", accessor: "wlt" },
+  { Header: "TB", accessor: "tb" },
+  { Header: "Set Wins", accessor: "setWins" },
+  { Header: "Set Ties", accessor: "setTies" },
+  { Header: "Points", accessor: "points" }
+];
+
 const Home = ({ history }) => {
   const {
     location: { pathname, search: searchString }
@@ -21,8 +31,14 @@ const Home = ({ history }) => {
     const players = [];
     for (let i = 0; i < participantsCount; i++) {
       players.push({
-        name: "Player " + (i + 1),
-        pool: `Pool ${parseInt(i % poolsCount) + 1}`
+        rank: i + 1,
+        participant: "Player " + (i + 1),
+        pool: `Pool ${parseInt(i % poolsCount) + 1}`,
+        wlt: "0-0-0",
+        tb: 0,
+        setWins: 0,
+        setTies: 0,
+        points: i === 8 ? 5 : 0
       });
     }
     return players;
@@ -56,7 +72,7 @@ const Home = ({ history }) => {
         data={SubheaderData}
       />
       {tab === UrlStrings.POOLS && (
-        <Pools pools={groupedPlayersByPools()} />
+        <Pools pools={groupedPlayersByPools()} columns={columns} />
       )}
     </div>
   );
