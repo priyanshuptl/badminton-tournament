@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Panel = ({ title, rows }) => {
+const Panel = ({ title, rows = [] }) => {
   const [collapsed, setCollapsed] = useState(false);
   return (
     <div>
@@ -15,7 +15,21 @@ const Panel = ({ title, rows }) => {
         className="content"
         style={{ display: collapsed ? "none" : "block" }}
       >
-        Rows Here!
+        {rows.map((row, index) => (
+          <div
+            key={"collapsible-content-row-" + index}
+            className="collapsible-content-row"
+          >
+            {Object.values(row).map(rowValue => (
+              <p
+                key={"collapsible-content-row-cell-" + rowValue}
+                className="collapsible-content-row-cell"
+              >
+                {rowValue}
+              </p>
+            ))}
+          </div>
+        ))}
       </div>
     </div>
   );

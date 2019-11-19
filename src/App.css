@@ -114,6 +114,10 @@
   background-color: #3a3d42;
 }
 
+.pools {
+  margin: 15px 0;
+}
+
 .collapsible {
   background-color: #777;
   color: white;
@@ -127,6 +131,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin: 2px 0;
 }
 
 .active,
@@ -138,4 +143,16 @@
   padding: 0 18px;
   overflow: hidden;
   background-color: #f1f1f1;
+  min-height: 100px;
+}
+
+.collapsible-content-row {
+  display: flex;
+  flex-direction: row;
+  padding: 0 50px;
+}
+
+.collapsible-content-row-cell {
+  min-width: 125px;
+  text-align: left;
 }
