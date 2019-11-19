@@ -13,9 +13,9 @@ const Header = ({ data: { title, tabs }, history }) => {
   return (
     <header className="App-header">
       {title && (
-        <h3 className="App-header-title" onClick={() => pushHistory("/")}>
+        <h2 className="App-header-title" onClick={() => pushHistory("/")}>
           {title}
-        </h3>
+        </h2>
       )}
       {tabs && (
         <div className="header-tabs-container">

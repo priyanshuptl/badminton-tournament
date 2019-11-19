@@ -4,11 +4,10 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 10vh;
+  min-height: 5vh;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  font-size: calc(10px + 2vmin);
   color: white;
 }
 
@@ -25,10 +24,11 @@
   min-height: 5vh;
   min-width: 15%;
   margin: 0;
-  padding: 30px;
+  padding: 15px;
+  display: flex;
   align-items: center;
   cursor: pointer;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(15px + 1vmin);
 }
 
 .header-tab-selected,
@@ -38,11 +38,10 @@
 
 .App-subheader {
   background-color: #3a4355;
-  min-height: 6vh;
+  min-height: 4vh;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  font-size: calc(10px + 1vmin);
   color: white;
 }
 
@@ -62,7 +61,7 @@
   padding: 15px;
   align-items: center;
   cursor: pointer;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(15px + 1vmin);
 }
 
 .subheader-tab-selected,
