@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const Panel = ({ title, rows = [] }) => {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
   return (
     <div>
       <button
