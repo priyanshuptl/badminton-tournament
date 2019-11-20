@@ -6,7 +6,6 @@ import Subheader from "../components/subheader";
 import Pools from "./pools";
 
 const columns = [
-  { Header: "Rank", accessor: "rank" },
   { Header: "Participant", accessor: "participant" },
   { Header: "W-L-T", accessor: "wlt" },
   { Header: "TB", accessor: "tb" },
@@ -31,14 +30,13 @@ const Home = ({ history }) => {
     const players = [];
     for (let i = 0; i < participantsCount; i++) {
       players.push({
-        rank: i + 1,
         participant: "Player " + (i + 1),
         pool: `Pool ${parseInt(i % poolsCount) + 1}`,
         wlt: "0-0-0",
         tb: 0,
         setWins: 0,
         setTies: 0,
-        points: i === 8 ? 5 : 0
+        points: 0
       });
     }
     return players;

@@ -8,7 +8,12 @@ const Table = ({ data, columns }) => (
     columns={columns}
     minRows={0}
     sortable={true}
-    defaultSorted={["points"]}
+    defaultSorted={[
+      {
+        id: "points",
+        desc: true
+      }
+    ]}
   />
 );
 
