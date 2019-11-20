@@ -113,7 +113,8 @@
   background-color: #3a3d42;
 }
 
-.pools {
+.pools,
+.schedule {
   margin: 10px 0;
 }
 

@@ -94,6 +94,7 @@ const Home = ({ history }) => {
             player1: players[i].name,
             type: "vs",
             player2: players[j].name,
+            space: "",
             date: "20 May 2019"
           });
         }
@@ -108,21 +109,27 @@ const Home = ({ history }) => {
 
     for (let i = n; i >= 1; i--) {
       if (i === 1) {
-        schedule["Final"] = [{ 1: "Final Match" }];
+        schedule["Final"] = [
+          { 1: "Final Match", space: "", date: "21 May 2019" }
+        ];
       } else if (i === 2) {
         schedule["Semi-finals"] = [
-          { 1: "Semi-final 1" },
-          { 2: "Semi-final 2" }
+          { 1: "Semi-final 1", space: "", date: "21 May 2019" },
+          { 2: "Semi-final 2", space: "", date: "21 May 2019" }
         ];
       } else {
         const knockOutMatches = [];
         for (let j = 1; j <= Math.pow(2, i) / 2; j++) {
-          knockOutMatches.push({ [i]: "Match " + j });
+          knockOutMatches.push({
+            [i]: "Match " + j,
+            space: "",
+            date: "21 May 2019"
+          });
         }
         schedule["Knock Out Round " + (n - i + 1)] = knockOutMatches;
       }
     }
-    
+
     return schedule;
   };
 
