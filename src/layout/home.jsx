@@ -63,9 +63,25 @@ const Home = ({ history }) => {
     history.push({ pathname, search: queryString.stringify(newSearch) });
   };
 
+  const getFinalizedTeamsLength = topTeamsLength => {
+    let i = 0;
+    let powerOf2 = 0;
+    let finalLength = 0;
+    while (powerOf2 <= topTeamsLength) {
+      if (powerOf2 === topTeamsLength) {
+        return powerOf2;
+      }
+      finalLength = powerOf2;
+      i++;
+      powerOf2 = Math.pow(2, i);
+    }
+    return finalLength;
+  };
+
   const getSchedule = () => {
     const pools = getGroupedPlayersByPools();
 
+    // Get inter pool matches
     const schedule = Object.keys(pools).reduce((acc, poolKey) => {
       const players = pools[poolKey];
       const matches = [];
@@ -74,7 +90,8 @@ const Home = ({ history }) => {
           matches.push({
             player1: players[i].name,
             type: "vs",
-            player2: players[j].name
+            player2: players[j].name,
+            date: "20 May 2019"
           });
         }
       }
@@ -82,6 +99,10 @@ const Home = ({ history }) => {
       return acc;
     }, {});
 
+    // Get knock out matches
+    const topTeamsLength = Object.keys(pools).length * qualifiersCountPerPool;
+    const finalizedTeamsLength = getFinalizedTeamsLength(topTeamsLength);
+    schedule["Total Knock Outs"] = [{ finalizedTeamsLength }];
     return schedule;
   };
 
