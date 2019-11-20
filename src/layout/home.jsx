@@ -4,9 +4,10 @@ import { withRouter } from "react-router-dom";
 import { SubheaderData, DefaultValues, UrlStrings } from "../static";
 import Subheader from "../components/subheader";
 import Pools from "./pools";
+import Schedule from "./schedule";
 
-const columns = [
-  { Header: "Participant", accessor: "participant" },
+const poolTableColumns = [
+  { Header: "Participant", accessor: "name" },
   { Header: "W-L-T", accessor: "wlt" },
   { Header: "TB", accessor: "tb" },
   { Header: "Set Wins", accessor: "setWins" },
@@ -30,7 +31,7 @@ const Home = ({ history }) => {
     const players = [];
     for (let i = 0; i < participantsCount; i++) {
       players.push({
-        participant: "Player " + (i + 1),
+        name: "Player " + (i + 1),
         pool: `Pool ${parseInt(i % poolsCount) + 1}`,
         wlt: "0-0-0",
         tb: 0,
@@ -42,7 +43,7 @@ const Home = ({ history }) => {
     return players;
   };
 
-  const groupedPlayersByPools = () => {
+  const getGroupedPlayersByPools = () => {
     const players = getPlayers();
 
     const pools = players.reduce((acc, player) => {
@@ -62,6 +63,28 @@ const Home = ({ history }) => {
     history.push({ pathname, search: queryString.stringify(newSearch) });
   };
 
+  const getSchedule = () => {
+    const pools = getGroupedPlayersByPools();
+
+    const schedule = Object.keys(pools).reduce((acc, poolKey) => {
+      const players = pools[poolKey];
+      const matches = [];
+      for (let i = 0; i < players.length - 1; i++) {
+        for (let j = i + 1; j < players.length; j++) {
+          matches.push({
+            player1: players[i].name,
+            type: "vs",
+            player2: players[j].name
+          });
+        }
+      }
+      acc[poolKey] = matches;
+      return acc;
+    }, {});
+
+    return schedule;
+  };
+
   return (
     <div>
       <Subheader
@@ -69,9 +92,13 @@ const Home = ({ history }) => {
         onSelectTab={pushSearch}
         data={SubheaderData}
       />
-      {tab === UrlStrings.POOLS && (
-        <Pools pools={groupedPlayersByPools()} columns={columns} />
-      )}
+      {tab === UrlStrings.POOLS ? (
+        <Pools pools={getGroupedPlayersByPools()} columns={poolTableColumns} />
+      ) : tab === UrlStrings.SCHEDULE ? (
+        <Schedule schedule={getSchedule()} />
+      ) : tab === UrlStrings.BRACKET ? (
+        <div>Brackets Here!</div>
+      ) : null}
     </div>
   );
 };

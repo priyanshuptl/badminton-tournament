@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import Table from "./table";
 
-const Panel = ({ title, rows = [], columns = [] }) => {
+const Panel = ({ title, children }) => {
   const [collapsed, setCollapsed] = useState(true);
   return (
     <div>
@@ -16,7 +15,7 @@ const Panel = ({ title, rows = [], columns = [] }) => {
         className="content"
         style={{ display: collapsed ? "none" : "block" }}
       >
-        <Table data={rows} columns={columns} />
+        {children}
       </div>
     </div>
   );
