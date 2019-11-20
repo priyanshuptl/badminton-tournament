@@ -141,7 +141,6 @@
 .content {
   overflow: hidden;
   background-color: #f1f1f1;
-  min-height: 40px;
 }
 
 .collapsible-content-row {

@@ -66,16 +66,19 @@ const Home = ({ history }) => {
   const getFinalizedTeamsLength = topTeamsLength => {
     let i = 0;
     let powerOf2 = 0;
-    let finalLength = 0;
+    let finalLength = 0,
+      n = 0;
+
     while (powerOf2 <= topTeamsLength) {
-      if (powerOf2 === topTeamsLength) {
-        return powerOf2;
-      }
       finalLength = powerOf2;
+      n = i;
+      if (powerOf2 === topTeamsLength) {
+        return { finalLength, n };
+      }
       i++;
       powerOf2 = Math.pow(2, i);
     }
-    return finalLength;
+    return { finalLength, n };
   };
 
   const getSchedule = () => {
@@ -101,8 +104,25 @@ const Home = ({ history }) => {
 
     // Get knock out matches
     const topTeamsLength = Object.keys(pools).length * qualifiersCountPerPool;
-    const finalizedTeamsLength = getFinalizedTeamsLength(topTeamsLength);
-    schedule["Total Knock Outs"] = [{ finalizedTeamsLength }];
+    const { n } = getFinalizedTeamsLength(topTeamsLength);
+
+    for (let i = n; i >= 1; i--) {
+      if (i === 1) {
+        schedule["Final"] = [{ 1: "Final Match" }];
+      } else if (i === 2) {
+        schedule["Semi-finals"] = [
+          { 1: "Semi-final 1" },
+          { 2: "Semi-final 2" }
+        ];
+      } else {
+        const knockOutMatches = [];
+        for (let j = 1; j <= Math.pow(2, i) / 2; j++) {
+          knockOutMatches.push({ [i]: "Match " + j });
+        }
+        schedule["Knock Out Round " + (n - i + 1)] = knockOutMatches;
+      }
+    }
+    
     return schedule;
   };
 
