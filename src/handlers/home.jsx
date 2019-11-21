@@ -3,8 +3,9 @@ import queryString from "query-string";
 import { withRouter } from "react-router-dom";
 import { SubheaderData, DefaultValues, UrlStrings } from "../static";
 import Subheader from "../components/subheader";
-import Pools from "./pools";
-import Schedule from "./schedule";
+import Pools from "../layout/pools";
+import Schedule from "../layout/schedule";
+import Brackets from "../layout/brackets";
 
 const poolTableColumns = [
   { Header: "Participant", accessor: "name" },
@@ -81,29 +82,8 @@ const Home = ({ history }) => {
     return { finalLength, n };
   };
 
-  const getSchedule = () => {
-    const pools = getGroupedPlayersByPools();
-
-    // Get inter pool matches
-    const schedule = Object.keys(pools).reduce((acc, poolKey) => {
-      const players = pools[poolKey];
-      const matches = [];
-      for (let i = 0; i < players.length - 1; i++) {
-        for (let j = i + 1; j < players.length; j++) {
-          matches.push({
-            player1: players[i].name,
-            type: "vs",
-            player2: players[j].name,
-            space: "",
-            date: "20 May 2019"
-          });
-        }
-      }
-      acc[poolKey] = matches;
-      return acc;
-    }, {});
-
-    // Get knock out matches
+  const getKnockOutMatches = pools => {
+    const schedule = {};
     const topTeamsLength = Object.keys(pools).length * qualifiersCountPerPool;
     const { n } = getFinalizedTeamsLength(topTeamsLength);
 
@@ -133,6 +113,49 @@ const Home = ({ history }) => {
     return schedule;
   };
 
+  const getSchedule = () => {
+    const pools = getGroupedPlayersByPools();
+
+    // Get inter pool matches
+    const schedule = Object.keys(pools).reduce((acc, poolKey) => {
+      const players = pools[poolKey];
+      const matches = [];
+      for (let i = 0; i < players.length - 1; i++) {
+        for (let j = i + 1; j < players.length; j++) {
+          matches.push({
+            player1: players[i].name,
+            type: "vs",
+            player2: players[j].name,
+            space: "",
+            date: "20 May 2019"
+          });
+        }
+      }
+      acc[poolKey] = matches;
+      return acc;
+    }, {});
+
+    return { ...schedule, ...getKnockOutMatches(pools) };
+  };
+
+  const getBracketsData = () => {
+    const knockOutMatches = getKnockOutMatches(getGroupedPlayersByPools());
+
+    const brackets = Object.values(knockOutMatches).map(matches =>
+      matches.map(() => [
+        {
+          user: "Player X",
+          isWinner: true,
+        },
+        {
+          user: "Player X",
+        }
+      ])
+    );
+    
+    return brackets;
+  };
+
   return (
     <div>
       <Subheader
@@ -145,7 +168,7 @@ const Home = ({ history }) => {
       ) : tab === UrlStrings.SCHEDULE ? (
         <Schedule schedule={getSchedule()} />
       ) : tab === UrlStrings.BRACKET ? (
-        <div>Brackets Here!</div>
+        <Brackets data={getBracketsData()} />
       ) : null}
     </div>
   );

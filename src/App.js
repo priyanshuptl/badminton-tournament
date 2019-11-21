@@ -3,8 +3,8 @@ import { Route, withRouter } from "react-router-dom";
 import { UrlStrings, HeaderData, DefaultValues } from "./static";
 import "./App.css";
 import Header from "./components/header.jsx";
-import ConfigureForm from "./layout/config.form";
-import Home from "./layout/home";
+import ConfigureForm from "./handlers/config.form";
+import Home from "./handlers/home";
 
 class App extends Component {
   render() {
