@@ -1,5 +1,5 @@
 import React from "react";
-import Panel from "../components/panel";
+import Panel from "../components/collapsible-panel";
 import Table from "../components/table";
 
 const Pools = ({ pools = {}, columns }) => (

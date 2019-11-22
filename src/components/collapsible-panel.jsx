@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Panel = ({ title, children, contentOverflow = "auto" }) => {
+const CollapsiblePanel = ({ title, children, contentOverflow = "auto" }) => {
   const [collapsed, setCollapsed] = useState(true);
   return (
     <div>
@@ -24,4 +24,4 @@ const Panel = ({ title, children, contentOverflow = "auto" }) => {
   );
 };
 
-export default Panel;
+export default CollapsiblePanel;
