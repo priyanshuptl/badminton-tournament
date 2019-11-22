@@ -4,11 +4,153 @@
 
 .App-header {
   background-color: #282c34;
+  min-height: 5vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  color: white;
+}
+
+.App-header-title {
+  cursor: pointer;
+}
+
+.header-tabs-container {
+  display: flex;
   min-height: 10vh;
+}
+
+.header-tab {
+  min-height: 5vh;
+  min-width: 15%;
+  margin: 0;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: calc(15px + 1vmin);
+}
+
+.header-tab-selected,
+.header-tab:hover {
+  background-color: #3a3d42;
+}
+
+.App-subheader {
+  background-color: #3a4355;
+  min-height: 4vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  color: white;
+}
+
+.App-subheader-title {
+  cursor: pointer;
+}
+
+.subheader-tabs-container {
+  display: flex;
+  min-height: 6vh;
+}
+
+.subheader-tab {
+  min-height: 5vh;
+  min-width: 15%;
+  margin: 0;
+  padding: 15px;
+  align-items: center;
+  cursor: pointer;
+  font-size: calc(15px + 1vmin);
+}
+
+.subheader-tab-selected,
+.subheader-tab:hover {
+  background-color: #4c576d;
+}
+
+.input-with-label {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  max-width: 600px;
+  align-self: center;
+}
+
+.inputs-container {
+  width: 100%;
+  justify-content: center;
   display: flex;
   flex-direction: column;
+}
+
+.input-label {
+  min-width: 300px;
+  text-align: initial;
+}
+
+.input-box-container {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+.input-box {
+  border-radius: 5px;
+  min-height: 20px;
+}
+
+.submit-button {
+  min-width: 120px;
+  min-height: 40px;
+  border-radius: 20px;
+  background-color: #282c34;
   color: white;
+  font-size: larger;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: #3a3d42;
+}
+
+.pools,
+.schedule {
+  margin: 10px 0;
+}
+
+.collapsible {
+  background-color: #777;
+  color: white;
+  cursor: pointer;
+  padding: 0 50px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 2px;
+}
+
+.active,
+.collapsible:hover {
+  background-color: #555;
+}
+
+.content {
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
+
+.collapsible-content-row {
+  display: flex;
+  flex-direction: row;
+  padding: 0 50px;
+}
+
+.collapsible-content-row-cell {
+  min-width: 125px;
+  text-align: left;
 }
