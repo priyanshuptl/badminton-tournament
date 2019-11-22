@@ -1,9 +1,17 @@
+:root {
+  --dark-gray-100: #282c34;
+  --dark-gray-75: #3a3d42;
+  --dark-gray-50: #525458;
+  --light-gray-100: #3a4355;
+  --light-gray-75: #4c576d;
+}
+
 .App {
   text-align: center;
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: var(--dark-gray-100);
   min-height: 5vh;
   display: flex;
   align-items: center;
@@ -33,11 +41,11 @@
 
 .header-tab-selected,
 .header-tab:hover {
-  background-color: #3a3d42;
+  background-color: var(--dark-gray-75);
 }
 
 .App-subheader {
-  background-color: #3a4355;
+  background-color: var(--light-gray-100);
   min-height: 4vh;
   display: flex;
   align-items: center;
@@ -66,7 +74,7 @@
 
 .subheader-tab-selected,
 .subheader-tab:hover {
-  background-color: #4c576d;
+  background-color: var(--light-gray-75);
 }
 
 .input-with-label {
@@ -75,6 +83,7 @@
   justify-content: space-between;
   max-width: 600px;
   align-self: center;
+  padding-top: 15px;
 }
 
 .inputs-container {
@@ -103,14 +112,15 @@
   min-width: 120px;
   min-height: 40px;
   border-radius: 20px;
-  background-color: #282c34;
+  background-color: var(--dark-gray-75);
   color: white;
   font-size: larger;
   cursor: pointer;
+  margin: 20px;
 }
 
 .submit-button:hover {
-  background-color: #3a3d42;
+  background-color: var(--dark-gray-100);
 }
 
 .pools,
@@ -119,7 +129,7 @@
 }
 
 .collapsible {
-  background-color: #777;
+  background-color: var(--dark-gray-50);
   color: white;
   cursor: pointer;
   padding: 0 50px;
@@ -136,12 +146,11 @@
 
 .active,
 .collapsible:hover {
-  background-color: #555;
+  background-color: var(--dark-gray-75);
 }
 
 .content {
-  overflow: hidden;
-  background-color: #f1f1f1;
+  background-color: rgb(241, 241, 243);
 }
 
 .collapsible-content-row {
@@ -152,5 +161,34 @@
 
 .collapsible-content-row-cell {
   min-width: 125px;
-  text-align: left;
+  text-align: center;
+}
+
+@media only screen and (max-width: 600px) {
+  .collapsible-content-row-cell {
+    min-width: 50px;
+  }
+
+  .collapsible-content-row {
+    padding: 0 10px;
+  }
+
+  .inputs-container {
+    overflow: scroll;
+  }
+
+  .input-with-label {
+    flex-direction: column;
+  }
+
+  .input-label {
+    width: 100%;
+    text-align: center;
+  }
+
+  .input-box-container {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+  }
 }

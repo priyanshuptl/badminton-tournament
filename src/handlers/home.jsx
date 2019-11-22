@@ -145,14 +145,14 @@ const Home = ({ history }) => {
       matches.map(() => [
         {
           user: "Player X",
-          isWinner: true,
+          isWinner: true
         },
         {
-          user: "Player X",
+          user: "Player X"
         }
       ])
     );
-    
+
     return brackets;
   };
 
