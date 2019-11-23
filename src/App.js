@@ -4,7 +4,7 @@ import { UrlStrings, HeaderData, DefaultValues } from "./static";
 import "./App.css";
 import Header from "./components/header.jsx";
 import ConfigureForm from "./handlers/config.form";
-import Home from "./handlers/home";
+import Home from "./handlers/tournament-handler";
 
 class App extends Component {
   render() {

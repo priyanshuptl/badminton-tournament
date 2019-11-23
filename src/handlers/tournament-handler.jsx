@@ -16,7 +16,7 @@ const poolTableColumns = [
   { Header: "Points", accessor: "points" }
 ];
 
-const Home = ({ history }) => {
+const TournamentHandler = ({ history }) => {
   const {
     location: { pathname, search: searchString }
   } = history;
@@ -217,4 +217,4 @@ const Home = ({ history }) => {
   );
 };
 
-export default withRouter(Home);
+export default withRouter(TournamentHandler);
