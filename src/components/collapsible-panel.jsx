@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Panel = ({ title, children }) => {
+const CollapsiblePanel = ({ title, children, contentOverflow = "auto" }) => {
   const [collapsed, setCollapsed] = useState(true);
   return (
     <div>
@@ -12,8 +12,12 @@ const Panel = ({ title, children }) => {
         <p>{collapsed ? "+" : "-"}</p>
       </button>
       <div
-        className="content"
-        style={{ display: collapsed ? "none" : "block" }}
+        className={
+          "content" + (contentOverflow === "scroll" ? " content-scroll" : "")
+        }
+        style={{
+          display: collapsed ? "none" : "block"
+        }}
       >
         {children}
       </div>
@@ -21,4 +25,4 @@ const Panel = ({ title, children }) => {
   );
 };
 
-export default Panel;
+export default CollapsiblePanel;

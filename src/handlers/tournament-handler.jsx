@@ -16,7 +16,7 @@ const poolTableColumns = [
   { Header: "Points", accessor: "points" }
 ];
 
-const Home = ({ history }) => {
+const TournamentHandler = ({ history }) => {
   const {
     location: { pathname, search: searchString }
   } = history;
@@ -25,7 +25,8 @@ const Home = ({ history }) => {
     participantsCount = DefaultValues.PARTICIPANTS_COUNT,
     poolsCount = DefaultValues.POOL_COUNT,
     qualifiersCountPerPool = DefaultValues.QUALIFIERS_COUNT_PER_POOL,
-    tab = DefaultValues.TAB
+    tab = DefaultValues.TAB,
+    showInterpoolMatches = true
   } = queryString.parse(searchString);
 
   const getPlayers = () => {
@@ -59,8 +60,11 @@ const Home = ({ history }) => {
     return pools;
   };
 
-  const pushSearch = tab => {
-    const newSearch = { ...queryString.parse(searchString), tab };
+  const pushSearch = (key, value) => {
+    const newSearch = {
+      ...queryString.parse(searchString),
+      [key]: value
+    };
     history.push({ pathname, search: queryString.stringify(newSearch) });
   };
 
@@ -113,11 +117,8 @@ const Home = ({ history }) => {
     return schedule;
   };
 
-  const getSchedule = () => {
-    const pools = getGroupedPlayersByPools();
-
-    // Get inter pool matches
-    const schedule = Object.keys(pools).reduce((acc, poolKey) => {
+  const getInterpoolMatches = pools =>
+    Object.keys(pools).reduce((acc, poolKey) => {
       const players = pools[poolKey];
       const matches = [];
       for (let i = 0; i < players.length - 1; i++) {
@@ -131,36 +132,68 @@ const Home = ({ history }) => {
           });
         }
       }
-      acc[poolKey] = matches;
+      if (matches.length) {
+        acc[poolKey] = matches;
+      }
       return acc;
     }, {});
+
+  const getSchedule = () => {
+    const pools = getGroupedPlayersByPools();
+
+    const schedule = getInterpoolMatches(pools);
 
     return { ...schedule, ...getKnockOutMatches(pools) };
   };
 
   const getBracketsData = () => {
-    const knockOutMatches = getKnockOutMatches(getGroupedPlayersByPools());
+    const pools = getGroupedPlayersByPools();
+    const knockOutMatches = getKnockOutMatches(pools);
 
     const brackets = Object.values(knockOutMatches).map(matches =>
       matches.map(() => [
         {
           user: "Player X",
-          isWinner: true,
+          isWinner: true
         },
         {
-          user: "Player X",
+          user: "Player X"
         }
       ])
     );
-    
-    return brackets;
+
+    const interpoolBrackets =
+      showInterpoolMatches === "true" || showInterpoolMatches === true
+        ? Object.values(getInterpoolMatches(pools)).reduce((acc, schedule) => {
+            const matches = schedule.map(match => [
+              {
+                user: match.player1
+              },
+              {
+                user: match.player2
+              }
+            ]);
+
+            acc.push(...matches);
+
+            return acc;
+          }, [])
+        : [];
+
+    return interpoolBrackets.length && brackets.length
+      ? [interpoolBrackets, ...brackets]
+      : interpoolBrackets.length
+      ? [interpoolBrackets]
+      : brackets.length
+      ? brackets
+      : [];
   };
 
   return (
     <div>
       <Subheader
         selectedTab={tab}
-        onSelectTab={pushSearch}
+        onSelectTab={tab => pushSearch("tab", tab)}
         data={SubheaderData}
       />
       {tab === UrlStrings.POOLS ? (
@@ -168,10 +201,23 @@ const Home = ({ history }) => {
       ) : tab === UrlStrings.SCHEDULE ? (
         <Schedule schedule={getSchedule()} />
       ) : tab === UrlStrings.BRACKET ? (
-        <Brackets data={getBracketsData()} />
+        <Brackets
+          data={getBracketsData()}
+          showInterpoolMatches={
+            showInterpoolMatches === "true" || showInterpoolMatches === true
+          }
+          toggleShowInterpoolMatches={() =>
+            pushSearch(
+              "showInterpoolMatches",
+              !(
+                showInterpoolMatches === "true" || showInterpoolMatches === true
+              )
+            )
+          }
+        />
       ) : null}
     </div>
   );
 };
 
-export default withRouter(Home);
+export default withRouter(TournamentHandler);
