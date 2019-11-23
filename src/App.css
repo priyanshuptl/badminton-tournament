@@ -81,7 +81,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  max-width: 600px;
+  max-width: 800px;
   align-self: center;
   padding-top: 15px;
 }
@@ -96,6 +96,11 @@
 .input-label {
   min-width: 300px;
   text-align: initial;
+}
+
+.error-message {
+  color: red;
+  align-self: center;
 }
 
 .input-box-container {

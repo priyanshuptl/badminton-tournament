@@ -132,7 +132,9 @@ const TournamentHandler = ({ history }) => {
           });
         }
       }
-      acc[poolKey] = matches;
+      if (matches.length) {
+        acc[poolKey] = matches;
+      }
       return acc;
     }, {});
 
@@ -162,28 +164,29 @@ const TournamentHandler = ({ history }) => {
 
     const interpoolBrackets =
       showInterpoolMatches === "true" || showInterpoolMatches === true
-        ? [
-            Object.values(getInterpoolMatches(pools)).reduce(
-              (acc, schedule) => {
-                const matches = schedule.map(match => [
-                  {
-                    user: match.player1
-                  },
-                  {
-                    user: match.player2
-                  }
-                ]);
-
-                acc.push(...matches);
-
-                return acc;
+        ? Object.values(getInterpoolMatches(pools)).reduce((acc, schedule) => {
+            const matches = schedule.map(match => [
+              {
+                user: match.player1
               },
-              []
-            )
-          ]
+              {
+                user: match.player2
+              }
+            ]);
+
+            acc.push(...matches);
+
+            return acc;
+          }, [])
         : [];
 
-    return [...interpoolBrackets, ...brackets];
+    return interpoolBrackets.length && brackets.length
+      ? [interpoolBrackets, ...brackets]
+      : interpoolBrackets.length
+      ? [interpoolBrackets]
+      : brackets.length
+      ? brackets
+      : [];
   };
 
   return (

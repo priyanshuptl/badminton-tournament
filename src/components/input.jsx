@@ -6,7 +6,8 @@ export default ({
   value,
   placeholder,
   isRequired,
-  type = "text"
+  type = "text",
+  errorMessage
 }) => (
   <div className="input-with-label">
     {label && <p className="input-label">{label}</p>}
@@ -20,5 +21,6 @@ export default ({
         required={isRequired}
       />
     </div>
+    {errorMessage && <div className="error-message">{errorMessage}</div>}
   </div>
 );

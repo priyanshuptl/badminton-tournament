@@ -3,8 +3,8 @@ import { Route, withRouter } from "react-router-dom";
 import { UrlStrings, HeaderData, DefaultValues } from "./static";
 import "./App.css";
 import Header from "./components/header.jsx";
-import ConfigureForm from "./handlers/config.form";
-import Home from "./handlers/tournament-handler";
+import ConfigureForm from "./handlers/config-form";
+import TournamentHandler from "./handlers/tournament-handler";
 
 class App extends Component {
   render() {
@@ -22,7 +22,7 @@ class App extends Component {
       <div className="App">
         <Header data={HeaderData} />
         <Route path={UrlStrings.CONFIGURE} component={ConfigureForm} />
-        <Route path={UrlStrings.HOME} component={Home} />
+        <Route path={UrlStrings.HOME} component={TournamentHandler} />
       </div>
     );
   }
