@@ -173,6 +173,10 @@
     padding: 0 10px;
   }
 
+  .content-scroll {
+    overflow: scroll;
+  }
+
   .inputs-container {
     overflow: scroll;
   }
@@ -190,5 +194,9 @@
     width: 100%;
     align-items: center;
     justify-content: center;
+  }
+
+  .brackets-container {
+    overflow: scroll;
   }
 }

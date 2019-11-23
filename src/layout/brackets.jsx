@@ -6,7 +6,7 @@ const Brackets = ({
   showInterpoolMatches,
   toggleShowInterpoolMatches
 }) => (
-  <div>
+  <div className="brackets-container">
     <input
       type="checkbox"
       checked={showInterpoolMatches}

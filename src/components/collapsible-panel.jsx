@@ -12,10 +12,11 @@ const CollapsiblePanel = ({ title, children, contentOverflow = "auto" }) => {
         <p>{collapsed ? "+" : "-"}</p>
       </button>
       <div
-        className="content"
+        className={
+          "content" + (contentOverflow === "scroll" ? " content-scroll" : "")
+        }
         style={{
-          display: collapsed ? "none" : "block",
-          overflow: contentOverflow
+          display: collapsed ? "none" : "block"
         }}
       >
         {children}
